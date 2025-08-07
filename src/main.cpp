@@ -1,4 +1,7 @@
 #include <Adafruit_INA228.h>
+#include <Wire.h>
+
+const int RESET_PIN = 7;
 
 const uint8_t DCDC18_ADDR = 0x0B;
 const uint8_t DCDC09_ADDR = 0x08;
@@ -10,7 +13,7 @@ float dcdc09_voltage = 0.9f;
 Adafruit_INA228 ina228_18 = Adafruit_INA228();
 Adafruit_INA228 ina228_09 = Adafruit_INA228();
 
-void setDCDC(uint8_t address, uint16_t value) {
+void setDCDCVoltage(uint8_t address, uint16_t value) {
   Wire.beginTransmission(address);
   Wire.write(0x12);
   Wire.write(value > 0xff ? 0x01 : 0x00);
@@ -25,17 +28,17 @@ void setDCDC(uint8_t address, uint16_t value) {
 void setup() {
   Serial.begin(115200);
 
-  pinMode(7, OUTPUT);
-  digitalWrite(7, HIGH);
+  pinMode(RESET_PIN, OUTPUT);
+  digitalWrite(RESET_PIN, HIGH);
 
   Serial.begin(115200);
   Wire.begin();
 
   // 1.8V DCDCの設定
-  setDCDC(DCDC18_ADDR, dcdc18_value);
+  setDCDCVoltage(DCDC18_ADDR, dcdc18_value);
 
   // 0.9V DCDCの設定
-  setDCDC(DCDC09_ADDR, dcdc09_value);
+  setDCDCVoltage(DCDC09_ADDR, dcdc09_value);
 
   // INA228の設定
   while (!ina228_18.begin(0x40)) {
@@ -61,24 +64,24 @@ void loop() {
     char command = Serial.read();
 
     if (command == 'H' || command == 'h') {
-      digitalWrite(7, HIGH);
+      digitalWrite(RESET_PIN, HIGH);
       Serial.println("HIGH");
     }
     if (command == 'L' || command == 'l') {
-      digitalWrite(7, LOW);
+      digitalWrite(RESET_PIN, LOW);
       Serial.println("LOW");
     }
     if (command == 'R' || command == 'r') {
-      digitalWrite(7, LOW);
+      digitalWrite(RESET_PIN, LOW);
       delay(200);
-      digitalWrite(7, HIGH);
+      digitalWrite(RESET_PIN, HIGH);
       Serial.println("RESET");
     }
 
     if (command == '1' && dcdc09_voltage > 0.6) {
       dcdc09_value -= 10;
       dcdc09_voltage -= 0.05;
-      setDCDC(DCDC09_ADDR, dcdc09_value);
+      setDCDCVoltage(DCDC09_ADDR, dcdc09_value);
 
       Serial.print("VCC: ");
       Serial.print(dcdc09_voltage, 2);
@@ -88,7 +91,7 @@ void loop() {
     if (command == '2' && dcdc09_voltage < 0.9) {
       dcdc09_value += 10;
       dcdc09_voltage += 0.05;
-      setDCDC(DCDC09_ADDR, dcdc09_value);
+      setDCDCVoltage(DCDC09_ADDR, dcdc09_value);
 
       Serial.print("VCC: ");
       Serial.print(dcdc09_voltage, 2);
@@ -98,7 +101,7 @@ void loop() {
     if (command == '3' && dcdc18_voltage > 1.2) {
       dcdc18_value -= 10;
       dcdc18_voltage -= 0.05;
-      setDCDC(DCDC18_ADDR, dcdc18_value);
+      setDCDCVoltage(DCDC18_ADDR, dcdc18_value);
 
       Serial.print("VCCIO: ");
       Serial.print(dcdc18_voltage, 2);
@@ -108,7 +111,7 @@ void loop() {
     if (command == '4' && dcdc18_voltage < 1.8) {
       dcdc18_value += 10;
       dcdc18_voltage += 0.05;
-      setDCDC(DCDC18_ADDR, dcdc18_value);
+      setDCDCVoltage(DCDC18_ADDR, dcdc18_value);
 
       Serial.print("VCCIO: ");
       Serial.print(dcdc18_voltage, 2);
@@ -117,9 +120,9 @@ void loop() {
 
     if (command == 'M' || command == 'm') {
       Serial.println("MEASUREMENT START");
-      digitalWrite(7, LOW);
+      digitalWrite(RESET_PIN, LOW);
       delay(200);
-      digitalWrite(7, HIGH);
+      digitalWrite(RESET_PIN, HIGH);
 
       Serial.println("Time,VCCIO,Current18,VCC,Current09");
 
