@@ -78,7 +78,7 @@ void loop() {
       Serial.println("RESET");
     }
 
-    if (command == '1' && dcdc09_voltage > 0.6) {
+    if (command == '1' && dcdc09_voltage > 0.8f) {
       dcdc09_value -= 10;
       dcdc09_voltage -= 0.05;
       setDCDCVoltage(DCDC09_ADDR, dcdc09_value);
@@ -88,7 +88,7 @@ void loop() {
       Serial.println(" V");
     }
 
-    if (command == '2' && dcdc09_voltage < 0.9) {
+    if (command == '2' && dcdc09_voltage < 1.0f) {
       dcdc09_value += 10;
       dcdc09_voltage += 0.05;
       setDCDCVoltage(DCDC09_ADDR, dcdc09_value);
@@ -98,7 +98,7 @@ void loop() {
       Serial.println(" V");
     }
 
-    if (command == '3' && dcdc18_voltage > 1.2) {
+    if (command == '3' && dcdc18_voltage > 1.6f) {
       dcdc18_value -= 10;
       dcdc18_voltage -= 0.05;
       setDCDCVoltage(DCDC18_ADDR, dcdc18_value);
@@ -108,7 +108,7 @@ void loop() {
       Serial.println(" V");
     }
 
-    if (command == '4' && dcdc18_voltage < 1.8) {
+    if (command == '4' && dcdc18_voltage < 2.0f) {
       dcdc18_value += 10;
       dcdc18_voltage += 0.05;
       setDCDCVoltage(DCDC18_ADDR, dcdc18_value);
@@ -117,6 +117,18 @@ void loop() {
       Serial.print(dcdc18_voltage, 2);
       Serial.println(" V");
     }
+
+    if (command == 'C' || command == 'c') {
+      Serial.print("VDDIO :");
+      Serial.print(ina228_18.getBusVoltage_V(), 3);
+      Serial.print("Current: ");
+      Serial.println(ina228_18.getCurrent_mA(), 3);
+      Serial.print("VDD: ");
+      Serial.print(ina228_09.getBusVoltage_V(), 3);
+      Serial.print("Current: ");
+      Serial.println(ina228_09.getCurrent_mA(), 3);
+    }
+  }
 
     if (command == 'M' || command == 'm') {
       Serial.println("MEASUREMENT START");
