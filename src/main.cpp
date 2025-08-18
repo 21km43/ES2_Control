@@ -78,43 +78,43 @@ void loop() {
       Serial.println("RESET");
     }
 
-    if (command == '1' && dcdc09_voltage > 0.8f) {
-      dcdc09_value -= 10;
-      dcdc09_voltage -= 0.05;
+    if (command == '1' && dcdc09_voltage > 0.81f) {
+      dcdc09_value -= 1;
+      dcdc09_voltage -= 0.005;
       setDCDCVoltage(DCDC09_ADDR, dcdc09_value);
 
       Serial.print("VCC: ");
-      Serial.print(dcdc09_voltage, 2);
+      Serial.print(dcdc09_voltage, 3);
       Serial.println(" V");
     }
 
-    if (command == '2' && dcdc09_voltage < 1.0f) {
-      dcdc09_value += 10;
-      dcdc09_voltage += 0.05;
+    if (command == '2' && dcdc09_voltage < 0.99f) {
+      dcdc09_value += 1;
+      dcdc09_voltage += 0.005;
       setDCDCVoltage(DCDC09_ADDR, dcdc09_value);
 
       Serial.print("VCC: ");
-      Serial.print(dcdc09_voltage, 2);
+      Serial.print(dcdc09_voltage, 3);
       Serial.println(" V");
     }
 
-    if (command == '3' && dcdc18_voltage > 1.6f) {
-      dcdc18_value -= 10;
-      dcdc18_voltage -= 0.05;
+    if (command == '3' && dcdc18_voltage > 1.62f) {
+      dcdc18_value -= 1;
+      dcdc18_voltage -= 0.005;
       setDCDCVoltage(DCDC18_ADDR, dcdc18_value);
 
       Serial.print("VCCIO: ");
-      Serial.print(dcdc18_voltage, 2);
+      Serial.print(dcdc18_voltage, 3);
       Serial.println(" V");
     }
 
-    if (command == '4' && dcdc18_voltage < 2.0f) {
-      dcdc18_value += 10;
-      dcdc18_voltage += 0.05;
+    if (command == '4' && dcdc18_voltage < 1.98f) {
+      dcdc18_value += 1;
+      dcdc18_voltage += 0.005;
       setDCDCVoltage(DCDC18_ADDR, dcdc18_value);
 
       Serial.print("VCCIO: ");
-      Serial.print(dcdc18_voltage, 2);
+      Serial.print(dcdc18_voltage, 3);
       Serial.println(" V");
     }
 
