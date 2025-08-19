@@ -128,7 +128,6 @@ void loop() {
       Serial.print("Current: ");
       Serial.println(ina228_09.getCurrent_mA(), 3);
     }
-  }
 
     if (command == 'M' || command == 'm') {
       Serial.println("MEASUREMENT START");
