@@ -119,14 +119,18 @@ void loop() {
     }
 
     if (command == 'C' || command == 'c') {
-      Serial.print("VDDIO :");
+      Serial.print("VDDIO: ");
       Serial.print(ina228_18.getBusVoltage_V(), 3);
+      Serial.print(" V\t");
       Serial.print("Current: ");
-      Serial.println(ina228_18.getCurrent_mA(), 3);
-      Serial.print("VDD: ");
+      Serial.print(ina228_18.getCurrent_mA(), 3);
+      Serial.print(" mA\t");
+      Serial.print("VDD:   ");
       Serial.print(ina228_09.getBusVoltage_V(), 3);
+      Serial.print(" V\t");
       Serial.print("Current: ");
-      Serial.println(ina228_09.getCurrent_mA(), 3);
+      Serial.print(ina228_09.getCurrent_mA(), 3);
+      Serial.print(" mA\n");
     }
 
     if (command == 'M' || command == 'm') {
