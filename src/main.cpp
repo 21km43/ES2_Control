@@ -78,7 +78,7 @@ void loop() {
       Serial.println("RESET");
     }
 
-    if (command == '1' && dcdc09_voltage > 0.4f) {
+    if (command == '1' && dcdc09_voltage > 0.6f) {
       dcdc09_value -= 1;
       dcdc09_voltage -= 0.005;
       setDCDCVoltage(DCDC09_ADDR, dcdc09_value);
@@ -98,7 +98,7 @@ void loop() {
       Serial.println(" V");
     }
 
-    if (command == '3' && dcdc18_voltage > 0.4f) {
+    if (command == '3' && dcdc18_voltage > 0.6f) {
       dcdc18_value -= 1;
       dcdc18_voltage -= 0.005;
       setDCDCVoltage(DCDC18_ADDR, dcdc18_value);
