@@ -18,4 +18,4 @@
 
 * [Adafruit_INA228](https://github.com/adafruit/Adafruit_INA228)
 
-If you want to develop on Arduino IDE, copy [main.cpp](/src/main.cpp) to .ino file, install libraries, and build - upload.
+If you want to develop on [Arduino IDE](https://www.arduino.cc/en/software), copy [main.cpp](/src/main.cpp) to .ino file, install libraries, and build - upload.
