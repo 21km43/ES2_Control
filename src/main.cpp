@@ -162,9 +162,9 @@ void loop() {
         Serial.print(ina228_09.getBusVoltage_V(), 3);
         Serial.print(",");
         Serial.print(ina228_09.getCurrent_mA(), 3);
-        Serial.println();
-        Serial.print(ina228_09.readDieTemp(), 3);
         Serial.print(",");
+        Serial.print(ina228_09.readDieTemp(), 3);
+        Serial.println();
       }
       Serial.println("MEASUREMENT END");
     }
