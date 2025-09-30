@@ -126,7 +126,7 @@ void loop() {
       Serial.print(ina228_18.getCurrent_mA(), 3);
       Serial.print(" mA\t");
       Serial.print("Temp: ");
-      Serial.print(ina228_18.readDieTemp()(), 3);
+      Serial.print(ina228_18.readDieTemp(), 3);
       Serial.print(" C\n");
       Serial.print("VDD:   ");
       Serial.print(ina228_09.getBusVoltage_V(), 3);
@@ -135,7 +135,7 @@ void loop() {
       Serial.print(ina228_09.getCurrent_mA(), 3);
       Serial.print(" mA\t");
       Serial.print("Temp: ");
-      Serial.print(ina228_09.readDieTemp()(), 3);
+      Serial.print(ina228_09.readDieTemp(), 3);
       Serial.print(" C\n");
     }
 
