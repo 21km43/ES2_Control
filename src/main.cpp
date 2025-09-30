@@ -125,12 +125,18 @@ void loop() {
       Serial.print("Current: ");
       Serial.print(ina228_18.getCurrent_mA(), 3);
       Serial.print(" mA\t");
+      Serial.print("Temp: ");
+      Serial.print(ina228_18.readDieTemp()(), 3);
+      Serial.print(" C\n");
       Serial.print("VDD:   ");
       Serial.print(ina228_09.getBusVoltage_V(), 3);
       Serial.print(" V\t");
       Serial.print("Current: ");
       Serial.print(ina228_09.getCurrent_mA(), 3);
-      Serial.print(" mA\n");
+      Serial.print(" mA\t");
+      Serial.print("Temp: ");
+      Serial.print(ina228_09.readDieTemp()(), 3);
+      Serial.print(" C\n");
     }
 
     if (command == 'M' || command == 'm') {
@@ -139,7 +145,7 @@ void loop() {
       delay(200);
       digitalWrite(RESET_PIN, HIGH);
 
-      Serial.println("Time,VCCIO,Current18,VCC,Current09");
+      Serial.println("Time,VCCIO,Current18,Temp18,VCC,Current09,Temp09");
 
       int s = millis();
       int t = 0;
@@ -151,10 +157,14 @@ void loop() {
         Serial.print(",");
         Serial.print(ina228_18.getCurrent_mA(), 3);
         Serial.print(",");
+        Serial.print(ina228_18.readDieTemp(), 3);
+        Serial.print(",");
         Serial.print(ina228_09.getBusVoltage_V(), 3);
         Serial.print(",");
         Serial.print(ina228_09.getCurrent_mA(), 3);
         Serial.println();
+        Serial.print(ina228_09.readDieTemp(), 3);
+        Serial.print(",");
       }
       Serial.println("MEASUREMENT END");
     }
