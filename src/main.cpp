@@ -34,13 +34,13 @@ void setup() {
   Serial.begin(115200);
   Wire.begin();
 
-  // 1.8V DCDCの設定
+  // 1.8V DCDC Setting
   setDCDCVoltage(DCDC18_ADDR, dcdc18_value);
 
-  // 0.9V DCDCの設定
+  // 0.9V DCDC Setting
   setDCDCVoltage(DCDC09_ADDR, dcdc09_value);
 
-  // INA228の設定
+  // INA228 Setting
   while (!ina228_18.begin(0x40)) {
     Serial.println("INA228 1.8V not found!");
     delay(1000);
