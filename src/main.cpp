@@ -50,11 +50,14 @@ void setup() {
     delay(1000);
   }
 
-  ina228_18.setShunt(0.002, 10.0);
+  ina228_18.reset();
+  ina228_09.reset();
+
+  ina228_18.setShunt(0.002, 70.0);
   ina228_18.setAveragingCount(INA228_COUNT_16);
   ina228_18.setVoltageConversionTime(INA228_TIME_150_us);
 
-  ina228_09.setShunt(0.002, 10.0);
+  ina228_09.setShunt(0.002, 70.0);
   ina228_09.setAveragingCount(INA228_COUNT_16);
   ina228_09.setVoltageConversionTime(INA228_TIME_150_us);
 }
