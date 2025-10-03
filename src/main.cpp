@@ -125,7 +125,7 @@ void loop() {
       Serial.print("Current: ");
       Serial.print(ina228_18.getCurrent_mA(), 3);
       Serial.print(" mA\t");
-      Serial.print("Power: ");
+      Serial.print("Power:  ");
       Serial.print(ina228_18.getPower_mW(), 3);
       Serial.print(" mW\t");
       Serial.print("Temp: ");
@@ -138,7 +138,7 @@ void loop() {
       Serial.print("Current: ");
       Serial.print(ina228_09.getCurrent_mA(), 3);
       Serial.print(" mA\t");
-      Serial.print("Power: ");
+      Serial.print("Power:  ");
       Serial.print(ina228_09.getPower_mW(), 3);
       Serial.print(" mW\t");
       Serial.print("Temp: ");
