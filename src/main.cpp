@@ -121,7 +121,7 @@ void loop() {
       Serial.println(" V");
     }
 
-    if (command == 'C' || command == 'c') {
+    if (command == 'c') {
       Serial.print("VDDIO: ");
       Serial.print(ina228_18.getBusVoltage_V(), 3);
       Serial.print(" V\t");
@@ -147,6 +147,11 @@ void loop() {
       Serial.print("Temp: ");
       Serial.print(ina228_09.readDieTemp(), 3);
       Serial.print(" C\n");
+    }
+
+    if (command == 'C') {
+      Serial.print(ina228_09.getPower_mW(), 3);
+      Serial.print("mW\n");
     }
 
     if (command == 'M' || command == 'm') {
