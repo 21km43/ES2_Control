@@ -156,15 +156,11 @@ void loop() {
 
     if (command == 'M' || command == 'm') {
       Serial.println("MEASUREMENT START");
-      digitalWrite(RESET_PIN, LOW);
-      delay(200);
-      digitalWrite(RESET_PIN, HIGH);
-
       Serial.println("Time,VCCIO,Current18,Power18,Temp18,VCC,Current09,Power09,Temp09");
 
       int s = millis();
       int t = 0;
-      while (t < 500) {
+      while (t < 1000) {
         t = millis() - s;
         Serial.print(t);
         Serial.print(",");
